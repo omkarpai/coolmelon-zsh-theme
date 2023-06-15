@@ -75,7 +75,7 @@ ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%} ➦%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%} ✂%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[white]%} ✱%{$reset_color%}"
 
-PROMPT='%B%{$FG[237]%}----------------------------------------------------------------------------------------------------------------------%{$reset_color%}%b
+PROMPT='%B%{$FG[237]%}----------------------------------------------------------------%{$reset_color%}%b
 %{$FG[046]%}╭─%{$reset_color%}${_return_status}$(_user_host)$(_current_dir) $(git_prompt) 
 %{$FG[046]%}╰───➤%{$reset_color%} $(prompt_indicator) '
 
