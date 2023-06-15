@@ -31,7 +31,7 @@ function _user_host() {
 
 
  _current_dir (){
- 	echo "%{$FG[027]%}[%{$FG[051]%} %~ %{$FG[027]%}]%{$reset_color%}"
+ 	echo "%{$FG[027]%}[%{$FG[051]%} %2~ %{$FG[027]%}]%{$reset_color%}"
  }
 
 current_time() {
