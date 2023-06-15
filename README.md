@@ -10,7 +10,7 @@
 <br>
 
 ### Intallation
-- Copy `coolmelon.zsh-theme` into `~/.oh-my-zsh/themes`
+- Copy `coolmelon.zsh-theme` into `~/.oh-my-zsh/custom/themes`
 - Modify the `ZSH_THEME="..."` line in `.zshrc` to `ZSH_THEME="coolmelon"`
 
 <br>
