@@ -52,14 +52,34 @@ function _node() {
    local version
    version=$(node -v 2>/dev/null) || version=""
    if [ "$version" != "" ]; then
-    		echo "%{$FG[040]%}node[$version]%{$reset_color%}"
+    		echo "%{$FG[040]%}Node[$version]%{$reset_color%}"
 	else
     		echo ""
 	fi
 }
 
+function _virtualenv() {
+   local venv
+   venv=$(virtualenv_prompt_info)
+   if [ "$venv" != "" ]; then
+    		echo "%{$FG[226]%}$venv %{$reset_color%}"
+	else
+    		echo ""
+	fi
+}
 
-
+function _prompt_by_file_extension() {
+   setopt localoptions no_nomatch
+    if [[ -n $(ls *.js 2>/dev/null) ]]; then
+        echo $(_node)
+    elif [[ -n $(ls *.ts 2>/dev/null) ]]; then
+         echo $(_node)
+    elif [[ -n $(ls *.py 2>/dev/null) ]]; then
+        echo $(_virtualenv)
+    else
+        echo "";
+    fi
+}
 
 # set the git_prompt_info text
 ZSH_THEME_GIT_PROMPT_PREFIX=""
@@ -81,4 +101,4 @@ PROMPT='%B%{$FG[237]%}----------------------------------------------------------
 
 
 
-RPROMPT='%{$(echotc UP 1)%}$(_node)%{$(echotc DO 1)%}'
+RPROMPT='%{$(echotc UP 1)%}$(_prompt_by_file_extension)%{$(echotc DO 1)%}'
