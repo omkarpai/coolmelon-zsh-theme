@@ -15,6 +15,11 @@
 
 <br>
 
+### Plugins support
+- git
+- virtualenv
+
+
 ### Terminal preferences
 - Optionally if you want your terminal to look exactly as the screenshot.
 
