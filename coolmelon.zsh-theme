@@ -17,22 +17,20 @@ arrow_end() {
 }
 
 function _user_host() {
-  local me
-  if [[ -n $SSH_CONNECTION ]]; then
-    me="%n@%m "
-  elif [[ $LOGNAME != $USERNAME ]]; then
-    me="%n "
-  fi
-  if [[ -n $me ]]; then
-    echo "%{$FG[046]%}$me%{$reset_color%}"
-  fi
+   local me
+   if [[ -n $SSH_CONNECTION ]]; then
+      me="%n@%m "
+   elif [[ $LOGNAME != $USERNAME ]]; then
+      me="%n "
+   fi
+   if [[ -n $me ]]; then
+      echo "%{$FG[046]%}$me%{$reset_color%}"
+   fi
 }
 
-
-
- _current_dir (){
- 	echo "%{$FG[027]%}[%{$FG[051]%} %2~ %{$FG[027]%}]%{$reset_color%}"
- }
+_current_dir() {
+   echo "%{$FG[027]%}[%{$FG[051]%} %2~ %{$FG[027]%}]%{$reset_color%}"
+}
 
 current_time() {
    echo "%{$fg[white]%}%*%{$reset_color%}"
@@ -40,45 +38,43 @@ current_time() {
 
 git_prompt() {
    local git
-   git=$(git_prompt_info)
+   git=$(_omz_git_prompt_info)
    if [[ -n $git ]]; then
-   	echo "%{$FG[069]%}on (%{$FG[046]%} $git %{$reset_color%}%{$FG[069]%})%{$reset_color%}"
-    fi
+      echo "%{$FG[069]%}on (%{$FG[046]%} $git %{$reset_color%}%{$FG[069]%})%{$reset_color%}"
+   fi
 }
-
-
 
 function _node() {
    local version
    version=$(node -v 2>/dev/null) || version=""
    if [ "$version" != "" ]; then
-    		echo "%{$FG[040]%}Node[$version]%{$reset_color%}"
-	else
-    		echo ""
-	fi
+      echo "%{$FG[040]%}Node[$version]%{$reset_color%}"
+   else
+      echo ""
+   fi
 }
 
 function _virtualenv() {
    local venv
    venv=$(virtualenv_prompt_info)
    if [ "$venv" != "" ]; then
-    		echo "%{$FG[226]%}$venv %{$reset_color%}"
-	else
-    		echo ""
-	fi
+      echo "%{$FG[226]%}$venv %{$reset_color%}"
+   else
+      echo ""
+   fi
 }
 
 function _prompt_by_file_extension() {
    setopt localoptions no_nomatch
-    if [[ -n $(ls *.js 2>/dev/null) ]]; then
-        echo $(_node)
-    elif [[ -n $(ls *.ts 2>/dev/null) ]]; then
-         echo $(_node)
-    elif [[ -n $(ls *.py 2>/dev/null) ]]; then
-        echo $(_virtualenv)
-    else
-        echo "";
-    fi
+   if [[ -n $(ls *.js 2>/dev/null) ]]; then
+      echo $(_node)
+   elif [[ -n $(ls *.ts 2>/dev/null) ]]; then
+      echo $(_node)
+   elif [[ -n $(ls *.py 2>/dev/null) ]]; then
+      echo $(_virtualenv)
+   else
+      echo ""
+   fi
 }
 
 # set the git_prompt_info text
@@ -98,7 +94,5 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[white]%} ✱%{$reset_color%}"
 PROMPT='%B%{$FG[237]%}----------------------------------------------------------------%{$reset_color%}%b
 %{$FG[046]%}╭─%{$reset_color%}${_return_status}$(_user_host)$(_current_dir) $(git_prompt) 
 %{$FG[046]%}╰───➤%{$reset_color%} $(prompt_indicator) '
-
-
 
 RPROMPT='%{$(echotc UP 1)%}$(_prompt_by_file_extension)%{$(echotc DO 1)%}'
